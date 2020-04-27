@@ -19,11 +19,13 @@ type VSphere struct {
 	Username                string
 	Password                string
 	DatacenterInstances     bool
+	DatacenterSampling      int
 	DatacenterMetricInclude []string
 	DatacenterMetricExclude []string
 	DatacenterInclude       []string
 	DatacenterExclude       []string
 	ClusterInstances        bool
+	ClusterSampling         int
 	ClusterMetricInclude    []string
 	ClusterMetricExclude    []string
 	ClusterInclude          []string
@@ -177,6 +179,7 @@ var sampleConfig = `
 
 
   ## Clusters
+  # cluster_sampling = 300
   # cluster_include = [ "/*/host/**"] # Inventory path to clusters to collect (by default all are collected)
   # cluster_exclude = [] # Inventory paths to exclude
   # cluster_metric_include = [] ## if omitted or empty, all metrics are collected
@@ -192,6 +195,7 @@ var sampleConfig = `
   # datastore_instances = false ## false by default
 
   ## Datacenters
+  # datacenter_sampling = 300
   # datacenter_include = [ "/*/host/**"] # Inventory path to clusters to collect (by default all are collected)
   # datacenter_exclude = [] # Inventory paths to exclude
   datacenter_metric_include = [] ## if omitted or empty, all metrics are collected
@@ -337,10 +341,12 @@ func init() {
 			Vcenters: []string{},
 
 			DatacenterInstances:     false,
+			DatacenterSampling:      300,
 			DatacenterMetricInclude: nil,
 			DatacenterMetricExclude: nil,
 			DatacenterInclude:       []string{"/*"},
 			ClusterInstances:        false,
+			ClusterSampling:         300,
 			ClusterMetricInclude:    nil,
 			ClusterMetricExclude:    nil,
 			ClusterInclude:          []string{"/*/host/**"},
