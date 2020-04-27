@@ -38,7 +38,8 @@ type VSphere struct {
 	VMMetricExclude         []string `toml:"vm_metric_exclude"`
 	VMInclude               []string `toml:"vm_include"`
 	VMExclude               []string `toml:"vm_exclude"`
-	DatastoreInstances      bool
+  DatastoreInstances      bool
+  DatastoreSampling       int
 	DatastoreMetricInclude  []string
 	DatastoreMetricExclude  []string
 	DatastoreInclude        []string
@@ -183,6 +184,7 @@ var sampleConfig = `
   # cluster_instances = false ## false by default
 
   ## Datastores
+  # datastore_sampling = 300
   # datastore_include = [ "/*/datastore/**"] # Inventory path to datastores to collect (by default all are collected)
   # datastore_exclude = [] # Inventory paths to exclude
   # datastore_metric_include = [] ## if omitted or empty, all metrics are collected
@@ -350,7 +352,8 @@ func init() {
 			VMMetricInclude:         nil,
 			VMMetricExclude:         nil,
 			VMInclude:               []string{"/*/vm/**"},
-			DatastoreInstances:      false,
+      DatastoreInstances:      false,
+      DatastoreSampling:       300,
 			DatastoreMetricInclude:  nil,
 			DatastoreMetricExclude:  nil,
 			DatastoreInclude:        []string{"/*/datastore/**"},

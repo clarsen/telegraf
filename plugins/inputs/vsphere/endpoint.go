@@ -209,7 +209,7 @@ func NewEndpoint(ctx context.Context, parent *VSphere, url *url.URL, log telegra
 			pKey:             "dsname",
 			enabled:          anythingEnabled(parent.DatastoreMetricExclude),
 			realTime:         false,
-			sampling:         300,
+			sampling:         parent.DatastoreSampling,
 			objects:          make(objectMap),
 			filters:          newFilterOrPanic(parent.DatastoreMetricInclude, parent.DatastoreMetricExclude),
 			paths:            parent.DatastoreInclude,
